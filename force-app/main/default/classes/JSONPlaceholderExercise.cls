@@ -8,13 +8,13 @@ public class JSONPlaceholderExercise {
      * @return String - The JSON response from the API
      */
     public static String getPostById(Integer postId) {
-        // TODO: Student Implementation
-        // 1. Create a new HTTP request
-        // 2. Set the endpoint URL using BASE_URL + '/posts/' + postId
-        // 3. Set the HTTP method to 'GET'
-        // 4. Send the request and get the response
-        // 5. Return the response body as string
-        return null;
+        String url = BASE_URL + '/posts/' + postId;
+        HttpRequest req = new HttpRequest();
+        req.setendpoint(url);
+        req.setmethod('GET');
+        Http http = new Http();
+        HttpResponse res = http.send(req);
+        return res.getbody();
     }
     
     /**
@@ -26,15 +26,14 @@ public class JSONPlaceholderExercise {
      * @return String - The JSON response from the API
      */
     public static String createPost(String title, String body, Integer userId) {
-        // TODO: Student Implementation
-        // 1. Create a new HTTP request
-        // 2. Set the endpoint URL using BASE_URL + '/posts'
-        // 3. Set the HTTP method to 'POST'
-        // 4. Create a JSON string with the post data
-        // 5. Set the request body
-        // 6. Send the request and get the response
-        // 7. Return the response body as string
-        return null;
+        HttpRequest req = new HttpRequest();
+        req.setendpoint(BASE_URL + '/posts');
+        req.setmethod('POST');
+        req.setHeader('Content-Type', 'application/json');
+        req.setBody('{"title": "' + title + '", "body": "' + body + '", "userId": ' + userId + '}');
+        Http http = new Http();
+        HttpResponse res = http.send(req);
+        return res.getbody();
     }
     
     /**
@@ -55,7 +54,15 @@ public class JSONPlaceholderExercise {
         // 5. Set the request body
         // 6. Send the request and get the response
         // 7. Return the response body as string
-        return null;
+
+        HttpRequest req = new HttpRequest();
+        req.setendpoint(BASE_URL + '/posts/' + postId);
+        req.setmethod('PUT');
+        req.setHeader('Content-Type', 'application/json');
+        req.setBody('{"title": "' + title + '", "body": "' + body + '", "userId": ' + userId + '}');
+        Http http = new Http();
+        HttpResponse res = http.send(req);
+        return res.getbody();
     }
     
     /**
@@ -74,7 +81,14 @@ public class JSONPlaceholderExercise {
         // 5. Set the request body
         // 6. Send the request and get the response
         // 7. Return the response body as string
-        return null;
+
+        HttpRequest req = new HttpRequest();
+        req.setEndpoint(BASE_URL+'/posts/'+postId);
+        req.setMethod('PATCH');
+        req.setBody('{"title": "' + title + '", "postId": "' + postId + '" }');
+        Http http = new Http();
+        HttpResponse res = http.send(req);
+        return res.getbody();
     }
     
     /**
@@ -90,6 +104,12 @@ public class JSONPlaceholderExercise {
         // 3. Set the HTTP method to 'DELETE'
         // 4. Send the request and get the response
         // 5. Return the response status code
-        return null;
+
+        HttpRequest req = new HttpRequest();
+        req.setEndpoint(BASE_URL + '/posts/' + postId);
+        req.setMethod('DELETE');
+        Http h = new Http();
+        HttpResponse res = h.send(req);
+        return res.getStatusCode();
     }
 } 
